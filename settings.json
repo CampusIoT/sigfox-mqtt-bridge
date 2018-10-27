@@ -1,0 +1,28 @@
+{
+  "id": "sigfox-mqtt-bridge-1",
+  "name": "Sigfox MQTT Bridge #1",
+
+  "env": "CampusIoT",
+
+  "loglevel": {
+    "error" : true,
+    "info" : false,
+    "debug" : false
+  },
+
+  "http": {
+    "port" : 8080,
+    "path" : "/sigfox"
+  },
+
+  "mqtt": {
+      "url" : "mqtt://mqtt",
+      "topic" : "application/sigfox",
+      "options": {
+        "username": "0",
+        "password": "__SUPER_SECRET_TO_CHANGE__",
+        "keepalive": 60,
+        "reconnectPeriod": 10000
+      }
+    }
+}

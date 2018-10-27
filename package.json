@@ -1,0 +1,26 @@
+{
+  "name": "sigfox-mqtt-bridge",
+  "version": "0.1.0",
+  "description": "bridge between the Sigfox backend and MQTT subscribers",
+  "main": "sigfox_mqtt_bridge.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mqtt": "^1.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CampusIoT/sigfox-mqtt-bridge.git"
+  },
+  "keywords": [
+    "sigfox",
+    "mqtt"
+  ],
+  "author": "Didier Donsez & Vivien Quéma",
+  "license": "EPLv2",
+  "homepage": "https://github.com/CampusIoT/sigfox-mqtt-bridge"
+}
