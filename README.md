@@ -12,6 +12,8 @@ The published message looks like this : {"data":"1e2d","id":"1C178","time":"1471
 
 Edit the settings.json configuration file.
 
+Edit the htpasswd password file.
+
 ## Run
 
     docker run -ti --name sigfox-mqtt-bridge -p 8080:8080 campusiot/sigfox-mqtt-bridge:latest
@@ -85,6 +87,7 @@ Contact: Didier Donsez
 * Certificate per user
 * MQTT failover
 * Support POST with application/json
+* Get password from a SQL database
 
 # Security considerations
 * sigfox-mqtt-bridge HTTP endpoint should be secured with a TLS terminaison (ngnix, haproxy)
