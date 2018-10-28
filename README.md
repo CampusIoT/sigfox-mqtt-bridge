@@ -14,7 +14,7 @@ Edit the settings.json configuration file.
 
 ## Run
 
-    docker run -ti --name sigfox-mqtt-bridge campusiot/sigfox-mqtt-bridge:latest
+    docker run -ti --name sigfox-mqtt-bridge -p 8080:8080 campusiot/sigfox-mqtt-bridge:latest
 
     mosquitto_sub -h test.mosquitto.org -t campusiot/sigfox
 
@@ -73,6 +73,13 @@ License: [EPLv2](https://www.eclipse.org/legal/epl-2.0/)
 ## Contact
 
 Contact: Didier Donsez
+
+## TODOLIST
+* Basic Authentication
+* Certificate per user
+* Topic per user
+* MQTT failover
+* Support POST with application/json
 
 ## Bonus track
 * https://github.com/nicolsc/sigfox-callback-demo
