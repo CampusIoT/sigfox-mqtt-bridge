@@ -16,9 +16,11 @@
   },
 
   "mqtt": {
-      "url" : "mqtt://test.mosquitto.org",
-      "topic" : "campusiot/sigfox",
+      "url" : "mqtt://mqtt",
+      "topic" : "application/sigfox",
       "options": {
+        "username": "0",
+        "password": "__SUPER_SECRET_TO_CHANGE__",
         "keepalive": 60,
         "reconnectPeriod": 10000
       }

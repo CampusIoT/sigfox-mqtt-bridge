@@ -33,9 +33,9 @@ Basic Authentication
 Certificat per user
 Topic per user
 MQTT failover
+Support POST with application/json
 
 */
-
 
 var express = require('express');
 var app = express();
@@ -90,5 +90,5 @@ app.get(PATH, handler);
 app.post(PATH, handler);
 
 app.listen(PORT, function () {
-  console.log('Listening on port', PORT, "path=", PATH);
+  console.log('Listening on port='+PORT, "path="+PATH);
 });

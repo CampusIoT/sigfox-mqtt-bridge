@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+  sigfox-mqtt-bridge:
+    build:
+      context: .
+    image: campusiot/sigfox-mqtt-bridge:latest
+#    links:
+#      - mqtt-1:moquitto
+    ports:
+      - 8080:8080
+    volumes:
+      - ~/configuration/sigfox-mqtt-bridge/settings.json:/usr/src/app/settings.json:ro
+    restart: unless-stopped

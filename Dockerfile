@@ -17,4 +17,4 @@ COPY . .
 
 CMD [ "npm", "start" ]
 
-EXPOSE 80
+EXPOSE 8080
