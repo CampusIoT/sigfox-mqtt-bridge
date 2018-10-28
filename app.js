@@ -29,16 +29,33 @@ var MQTT_TOPIC = SETTINGS.mqtt.topic;
 /*
 TODOLIST
 
-Basic Authentication
 Certificat per user
-Topic per user
 MQTT failover
 Support POST with application/json
 
 */
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: SETTINGS.http.realm,
+    file: SETTINGS.http.passwordfile
+});
+
+basic.on('success', (result, req) => {
+    console.log(`User authenticated: user=${result.user} ip=${req.ip} hostname=${req.hostname}`);
+});
+
+basic.on('fail', (result, req) => {
+    console.log(`User authentication failed : user=${result.user} ip=${req.ip} hostname=${req.hostname}`);
+});
+
+basic.on('error', (error, req) => {
+    console.log(`Authentication error: ${error.code + " - " + error.message}`);
+});
 
 var express = require('express');
+
 var app = express();
+app.use(auth.connect(basic));
 
 var mqtt    = require('mqtt');
 var client  = mqtt.connect(MQTT_BROKER_URL, MQTT_OPTIONS);
@@ -72,11 +89,11 @@ client.on('error', function (error) {
 
 function handler(req, res) {
 
-  console.log("Received GET ", JSON.stringify(req.query));
+  console.log("Received GET ", JSON.stringify(req.query), "user="+req.user);
 
   if(mqttConnected) {
 
-     client.publish(MQTT_TOPIC, JSON.stringify(req.query));
+     client.publish(MQTT_TOPIC + "/" + req.user, JSON.stringify(req.query));
 
      // published message looks like this : Received GET  {"data":"1723","id":"1AEA29","time":"1481821861","snr":"19.06","station":"0FAD","avgSnr":"37.66","rssi":"-132.00","lat":"45.0","lng":"6.0","seqNumber":"4084","duplicate":"true"}
 

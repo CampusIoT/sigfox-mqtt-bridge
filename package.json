@@ -5,6 +5,7 @@
   "main": "sigfox_mqtt_bridge.js",
   "dependencies": {
     "express": "^4.16.4",
+    "http-auth": "^3.2.3",
     "mqtt": "^1.14.1"
   },
   "devDependencies": {},

@@ -12,7 +12,9 @@
 
   "http": {
     "port" : 8080,
-    "path" : "/sigfox"
+    "path" : "/sigfox",
+    "realm": "Sigfox",
+    "passwordfile": "./htpasswd"
   },
 
   "mqtt": {

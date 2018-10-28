@@ -16,9 +16,11 @@ Edit the settings.json configuration file.
 
     docker run -ti --name sigfox-mqtt-bridge -p 8080:8080 campusiot/sigfox-mqtt-bridge:latest
 
-    mosquitto_sub -h test.mosquitto.org -t campusiot/sigfox
+    mosquitto_sub -h test.mosquitto.org -t campusiot/sigfox/#
 
-    curl http://localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516
+    curl 'http://ftd:__SUPER_SECRET_TO_CHANGE__@localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516'
+
+    curl 'http://localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516'
 
 ## Running with persistence
 
@@ -33,19 +35,24 @@ persistent and change the configuration.
       --name sigfox-mqtt-bridge \
       -p 8080:8080 \
       -v ~/configuration/sigfox-mqtt-bridge/settings.json:/usr/src/app/settings.json:ro \
+      -v ~/configuration/sigfox-mqtt-bridge/htpasswd:/usr/src/app/htpasswd:ro \
       campusiot/sigfox-mqtt-bridge:latest
 
-Volumes: /usr/src/app/settings.json
+Volumes: /usr/src/app/settings.json, /usr/src/app/htpasswd
 
 ## Running with Docker Compose
 
     mkdir -p ~/configuration/sigfox-mqtt-bridge/
     cp ./settings.json ~/configuration/sigfox-mqtt-bridge/
+    ./create_passwd.sh
+    cp ./htpasswd ~/configuration/sigfox-mqtt-bridge/
     docker-compose -f docker-compose.yml up
 
-    mosquitto_sub -h test.mosquitto.org -t campusiot/sigfox
+    mosquitto_sub -h test.mosquitto.org -t campusiot/sigfox/#
 
-    curl http://localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516
+    curl 'http://ftd:__SUPER_SECRET_TO_CHANGE__@localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516'
+
+    curl 'http://localhost:8080/sigfox?time=1471594359&device=1C178&duplicate=false&snr=12.13&station=0AF0&data=1e2d&avgSnr=19.75&lat=45&lng=6&rssi=-135.00&seqNumber=2516'
 
 ## Build
 
@@ -75,11 +82,13 @@ License: [EPLv2](https://www.eclipse.org/legal/epl-2.0/)
 Contact: Didier Donsez
 
 ## TODOLIST
-* Basic Authentication
 * Certificate per user
-* Topic per user
 * MQTT failover
 * Support POST with application/json
+
+# Security considerations
+* sigfox-mqtt-bridge HTTP endpoint should be secured with a TLS terminaison (ngnix, haproxy)
+* sigfox-mqtt-bridge HTTP endpoint should be protected again brute-force password cracking using fail2ban
 
 ## Bonus track
 * https://github.com/nicolsc/sigfox-callback-demo

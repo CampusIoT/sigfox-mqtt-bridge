@@ -11,4 +11,5 @@ services:
       - 8080:8080
     volumes:
       - ~/configuration/sigfox-mqtt-bridge/settings.json:/usr/src/app/settings.json:ro
+#      - ~/configuration/sigfox-mqtt-bridge/htpasswd:/usr/src/app/htpasswd:ro
     restart: unless-stopped
