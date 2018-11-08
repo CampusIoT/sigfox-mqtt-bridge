@@ -95,10 +95,10 @@ License: [EPLv2](https://www.eclipse.org/legal/epl-2.0/)
 Contact: Didier Donsez
 
 ## TODOLIST
-[ ] Certificate per user
-[ ] MQTT failover
-[ ] Support POST with application/json
-[ ] Get password from a SQL database
+* [ ] Certificate per user
+* [ ] MQTT failover
+* [ ] Support POST with application/json
+* [ ] Get password from a SQL database
 
 # Security considerations
 * sigfox-mqtt-bridge HTTP endpoint should be secured with a TLS terminaison (ngnix, haproxy)
